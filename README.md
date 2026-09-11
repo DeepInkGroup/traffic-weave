@@ -31,7 +31,19 @@ Select **Build Road**, choose a road class, then select two circular junctions:
 | Avenue | Balanced speed and capacity | 2 | $360 |
 | Highway | Fast, wide, and high-capacity | 2 | $620 |
 
-Vehicles dynamically choose routes based on current travel time. Congestion reduces their speed, while road class and lane upgrades improve capacity. The live HUD reports trip time, network flow, score, planner rank, hottest road, and budget.
+### Road Studio
+
+The visual Road Studio works like a compact design canvas. Before placing a connection, you can:
+
+- Choose a direct line, left arc, right arc, or fully drivable S-bend.
+- Apply Mist, Coastal, Sand, or Graphite surface palettes.
+- Give the road a custom name.
+- Add smart signals for better flow, a transit lane for more capacity, or a green buffer for design score.
+- See the total construction price update instantly as options change.
+
+Multiple differently shaped connections can link the same two junctions, creating parallel local and express routes. Infrastructure can also be installed later from the selected-road inspector.
+
+Vehicles dynamically choose routes based on current travel time. Congestion reduces their speed, while road class, signals, transit infrastructure, and lane upgrades improve capacity. The live HUD reports trip time, network flow, score, planner rank, hottest road, and budget.
 
 ## Technology
 
