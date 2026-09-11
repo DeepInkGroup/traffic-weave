@@ -1,23 +1,38 @@
 # Traffic Weave
 
-A polished, browser-based traffic-management game. Route demand grows over a 90-second round; inspect busy roads, spend a limited city budget on extra lanes, and keep average trip time below 18 minutes.
+Traffic Weave is a polished browser-based traffic-management game inspired by clean infographic design. Build streets, avenues, and highways between junctions, expand overloaded roads, and keep a growing city moving.
 
-## Play locally
+## Play
 
-No build step or dependencies are required.
+**Live game:** https://deepinkgroup.github.io/traffic-weave/
+
+No installation or build step is required. To run locally:
 
 ```powershell
-cd traffic-weave
-python -m http.server 8080
+python -m http.server 4173
 ```
 
-Then open `http://localhost:8080`.
+Then open http://localhost:4173.
 
-## Controls
+## Game modes
 
-- Click or tap any road to select it.
-- Use **Add a Lane** to increase that road's capacity.
-- Keep an eye on road load, the live trip-time graph, network flow, and budget.
-- Pause or mute from the top-right controls.
+- **Solo** — a balanced 90-second planning challenge.
+- **Rush Hour** — a fast 60-second round with rapidly increasing demand.
+- **Ranked** — a strict 120-second score run with persistent local best scores and planner ranks.
+- **Sandbox** — unlimited time and budget for free-form city design.
 
-The simulation includes dynamic route selection, congestion-sensitive travel speed, increasing traffic demand, responsive touch controls, and a win/lose round state.
+## Build and manage
+
+Select **Build Road**, choose a road class, then select two circular junctions:
+
+| Road | Character | Starting lanes | Cost |
+| --- | --- | ---: | ---: |
+| Street | Affordable and flexible | 1 | $180 |
+| Avenue | Balanced speed and capacity | 2 | $360 |
+| Highway | Fast, wide, and high-capacity | 2 | $620 |
+
+Vehicles dynamically choose routes based on current travel time. Congestion reduces their speed, while road class and lane upgrades improve capacity. The live HUD reports trip time, network flow, score, planner rank, hottest road, and budget.
+
+## Technology
+
+The game is dependency-free HTML, CSS, and Canvas JavaScript. It includes responsive mouse/touch controls, high-DPI rendering, procedural traffic simulation, Web Audio feedback, local score persistence, and automated GitHub Pages deployment.

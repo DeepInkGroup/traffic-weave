@@ -4,69 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f7f8f5">
-  <meta name="description" content="Traffic Weave — a minimalist traffic-management game.">
-  <title>Traffic Weave</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Traffic Weave — design roads and keep a growing city moving.">
+  <title>Traffic Weave</title><link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <main class="game-shell">
-    <header class="topbar">
-      <div class="brand" aria-label="Traffic Weave">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span><strong>TRAFFIC</strong><small>WEAVE</small></span>
-      </div>
-      <div class="mission"><span class="mission-dot"></span><span>Keep average travel below <strong>18 min</strong></span></div>
-      <div class="top-actions">
-        <button class="icon-button" id="soundButton" type="button" aria-label="Toggle sound" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5-.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></button>
-        <button class="pause-button" id="pauseButton" type="button" aria-label="Pause game"><svg id="pauseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v12M16 6v12"/></svg></button>
-      </div>
-    </header>
-
-    <section class="play-area">
-      <canvas id="gameCanvas" aria-label="Interactive road network. Select a road to inspect and upgrade it."></canvas>
-      <div class="level-chip"><span>DAY 04</span><b>THE SHORTCUT</b></div>
-      <div class="toast" id="toast" role="status" aria-live="polite"></div>
-      <aside class="road-card" id="roadCard" aria-live="polite">
-        <div class="road-card-heading">
-          <div><small>SELECTED ROAD</small><h2 id="roadName">Market Link</h2></div>
-          <span class="flow-pill" id="flowPill">FLOWING</span>
-        </div>
-        <div class="road-meter"><i id="roadMeter"></i></div>
-        <div class="road-details">
-          <span><small>LANES</small><strong id="laneCount">1</strong></span>
-          <span><small>TRAFFIC</small><strong id="trafficCount">0</strong></span>
-          <span><small>TRAVEL</small><strong id="roadTravel">0.0m</strong></span>
-        </div>
-        <button id="upgradeButton" type="button"><span>ADD A LANE</span><strong id="upgradeCost">$400</strong></button>
-      </aside>
-      <div class="hint" id="hint"><span class="tap-icon" aria-hidden="true"></span>Tap a road to manage traffic</div>
-    </section>
-
-    <section class="hud" aria-label="Traffic statistics">
-      <div class="spark-panel">
-        <div class="spark-heading"><span>AVG. MINUTES ACROSS TOWN</span><strong id="trendLabel">STABLE</strong></div>
-        <canvas id="sparkCanvas" aria-hidden="true"></canvas>
-      </div>
-      <div class="stats-row">
-        <article class="stat stat-time"><span>TRIP TIME</span><strong id="tripTime">12.4 <small>min</small></strong></article>
-        <article class="stat stat-road"><span>HOTTEST ROAD</span><strong id="hotRoad">Market Link</strong><small id="hotRoadDetail">1 LANE · 0% LOAD</small></article>
-        <article class="stat"><span>NETWORK FLOW</span><strong id="networkFlow">100<small>%</small></strong></article>
-        <article class="stat"><span>TRIPS DONE</span><strong id="tripsDone">0</strong></article>
-        <article class="stat stat-budget"><span>BUDGET</span><strong id="budget">$720</strong></article>
-      </div>
-    </section>
-
-    <div class="end-screen" id="endScreen" hidden>
-      <div class="end-card">
-        <div class="result-icon" id="resultIcon">✓</div><small id="resultEyebrow">CITY MOVING</small>
-        <h1 id="resultTitle">Beautifully balanced.</h1><p id="resultText">You kept the town moving while demand climbed.</p>
-        <div class="result-stats">
-          <span><small>TRIPS</small><b id="resultTrips">0</b></span><span><small>AVG TIME</small><b id="resultTime">0m</b></span><span><small>FLOW</small><b id="resultFlow">0%</b></span>
-        </div>
-        <button id="restartButton" type="button">PLAY AGAIN</button>
+<body><main class="game-shell">
+  <header class="topbar">
+    <div class="brand" aria-label="Traffic Weave"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>TRAFFIC</strong><small>WEAVE</small></span></div>
+    <div class="mission"><span class="mission-dot"></span><span id="missionText">Keep average travel below <strong>18 min</strong></span></div>
+    <div class="top-actions"><button class="mode-button" id="modeButton" type="button"><small>MODE</small><strong id="modeLabel">SOLO</strong></button><button class="icon-button" id="soundButton" type="button" aria-label="Toggle sound" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5-.5a5 5 0 0 1 0 7M18.8 6a8.5 8.5 0 0 1 0 12"/></svg></button><button class="pause-button" id="pauseButton" type="button" aria-label="Pause game"><svg id="pauseIcon" viewBox="0 0 24 24"><path d="M8 6v12M16 6v12"/></svg></button></div>
+  </header>
+  <section class="play-area">
+    <canvas id="gameCanvas" aria-label="Interactive road network. Select roads or construct new links between junctions."></canvas>
+    <div class="level-chip"><span id="dayLabel">DAY 04</span><b id="chapterLabel">THE SHORTCUT</b></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="build-tools"><button class="build-button" id="buildButton" type="button"><span class="plus">+</span><span><small>NETWORK</small><strong>BUILD ROAD</strong></span></button>
+      <div class="build-panel" id="buildPanel" hidden><div class="build-heading"><span><small>CONSTRUCTION</small><strong id="buildInstruction">Choose a road type</strong></span><button id="cancelBuild" type="button" aria-label="Cancel construction">×</button></div>
+        <button class="road-type active" data-type="street" type="button"><i class="road-swatch street"></i><span><b>STREET</b><small>Flexible · 1 lane</small></span><strong>$180</strong></button>
+        <button class="road-type" data-type="avenue" type="button"><i class="road-swatch avenue"></i><span><b>AVENUE</b><small>Balanced · 2 lanes</small></span><strong>$360</strong></button>
+        <button class="road-type" data-type="highway" type="button"><i class="road-swatch highway"></i><span><b>HIGHWAY</b><small>Fast · high capacity</small></span><strong>$620</strong></button>
+        <p><span class="step-dot active">1</span> Pick start <i></i><span class="step-dot">2</span> Pick destination</p>
       </div>
     </div>
-  </main>
-  <script src="game.js"></script>
-</body>
-</html>
+    <aside class="road-card" id="roadCard" aria-live="polite"><div class="road-card-heading"><div><small>SELECTED ROAD</small><h2 id="roadName">Market Link</h2></div><span class="flow-pill" id="flowPill">FLOWING</span></div><div class="type-label"><i id="typeSwatch"></i><span id="roadType">STREET</span></div><div class="road-meter"><i id="roadMeter"></i></div><div class="road-details"><span><small>LANES</small><strong id="laneCount">1</strong></span><span><small>TRAFFIC</small><strong id="trafficCount">0</strong></span><span><small>TRAVEL</small><strong id="roadTravel">0.0m</strong></span></div><button id="upgradeButton" type="button"><span>ADD A LANE</span><strong id="upgradeCost">$400</strong></button></aside>
+    <div class="hint" id="hint"><span class="tap-icon"></span>Tap a road to manage traffic</div>
+  </section>
+  <section class="hud" aria-label="Traffic statistics"><div class="spark-panel"><div class="spark-heading"><span>AVG. MINUTES ACROSS TOWN</span><strong id="trendLabel">STABLE</strong></div><canvas id="sparkCanvas"></canvas></div><div class="stats-row"><article class="stat stat-time"><span>TRIP TIME</span><strong id="tripTime">12.4 <small>min</small></strong></article><article class="stat stat-road"><span>HOTTEST ROAD</span><strong id="hotRoad">Market Link</strong><small id="hotRoadDetail">1 LANE · 0% LOAD</small></article><article class="stat"><span>NETWORK FLOW</span><strong id="networkFlow">100<small>%</small></strong></article><article class="stat"><span id="scoreCaption">SCORE</span><strong id="score">0</strong><small id="rankLabel">CITY INTERN</small></article><article class="stat stat-budget"><span>BUDGET</span><strong id="budget">$900</strong></article></div></section>
+  <div class="mode-screen" id="modeScreen"><section class="mode-card"><div class="mode-logo"><span class="brand-mark"><i></i><i></i><i></i></span></div><small>CHOOSE YOUR CITY</small><h1>How do you want to play?</h1><p>Every city has a different rhythm. Pick a challenge and draw the connections it needs.</p><div class="mode-grid"><button class="mode-choice active" data-mode="solo" type="button"><i>01</i><span><b>SOLO</b><small>A balanced city-building run</small></span><em>90 SEC</em></button><button class="mode-choice" data-mode="rush" type="button"><i>02</i><span><b>RUSH HOUR</b><small>Demand climbs twice as fast</small></span><em>60 SEC</em></button><button class="mode-choice" data-mode="ranked" type="button"><i>03</i><span><b>RANKED</b><small>Strict budget. Chase a high score</small></span><em>120 SEC</em></button><button class="mode-choice" data-mode="sandbox" type="button"><i>∞</i><span><b>SANDBOX</b><small>Unlimited building and no clock</small></span><em>FREE PLAY</em></button></div><button class="start-button" id="startButton" type="button">START SOLO <span>→</span></button></section></div>
+  <div class="end-screen" id="endScreen" hidden><div class="end-card"><div class="result-icon" id="resultIcon">✓</div><small id="resultEyebrow">CITY MOVING</small><h1 id="resultTitle">Beautifully balanced.</h1><p id="resultText">You kept the town moving while demand climbed.</p><div class="result-stats"><span><small>TRIPS</small><b id="resultTrips">0</b></span><span><small>AVG TIME</small><b id="resultTime">0m</b></span><span><small>SCORE</small><b id="resultScore">0</b></span></div><div class="end-actions"><button id="restartButton" type="button">PLAY AGAIN</button><button id="changeModeButton" class="secondary" type="button">CHANGE MODE</button></div></div></div>
+</main><script src="game.js"></script></body></html>
