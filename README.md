@@ -64,6 +64,18 @@ The game detects geometric intersections between surface roads. Their route cost
 - Maintaining strong network flow during an event earns a response bonus.
 - Every 25 completed trips unlocks a city infrastructure grant.
 
+### Flow Lens and city policies
+
+Use **Flow Lens** in the top bar to switch from the clean city view to an analytical overlay. It adds live utilization percentages, green-to-red load halos, and warnings for at-grade crossing conflicts without pausing the simulation.
+
+At each 25-trip milestone, choose a permanent policy for the current run:
+
+- **Mobility Fund** reduces tunnel and overpass construction costs by 30%.
+- **Transit First** gives every transit lane five additional vehicles of capacity.
+- **Care Program** slows road wear by 45% and makes maintenance cheaper.
+
+The canvas also includes understated district context—waterfront contours, market blocks, park landscaping, station tracks, and infrastructure depth—to make the network easier to read while preserving the minimalist visual language.
+
 Vehicles dynamically choose routes based on current travel time. Congestion reduces their speed, while road class, signals, transit infrastructure, and lane upgrades improve capacity. The live HUD reports trip time, network flow, score, planner rank, hottest road, and budget.
 
 ## Technology
