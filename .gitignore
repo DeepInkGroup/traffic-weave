@@ -1,0 +1,5 @@
+.edge-test/
+.edge-mobile-test/
+desktop.png
+mobile.png
+*.log
